@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+</head>
+<body>
+    <div>Augmenting Types</div>
+    <pre>
+    <script>
+
+        // By augmenting Function.prototype with a method method, we no longer have to type
+        // the name of the prototype property. That bit of ugliness can now be hidden.
+        /*
+        Function.prototype.method = function (name, func) {
+            this.prototype[name] = func;
+            return this;
+        };*/
+
+
+        // Add a method conditionally.
+        Function.prototype.method = function (name, func) {
+            if (!this.prototype[name]) {
+                this.prototype[name] = func;
+            }
+        };
+
+
+        //We can fix it by adding an integer method to Number.prototype. It uses either
+        //Math.ceiling or Math.floor, depending on the sign of the number:
+
+        Number.method('integer', function () {
+            return Math[this<0? 'ceil':'floor'](this);
+        });
+
+        document.writeln("Julia is testing -10/3 =" + (-10/3).integer()); // -3
+
+        document.writeln("Julia is testing 10/3 = " + (10/3).integer()); // -3
+
+        //JavaScript lacks a method that removes spaces from the ends of a string. That is an
+        //easy oversight to fix:
+        String.method('trim', function ( ) {
+            return this.replace(/^\s+|\s+$/g, '');
+        });
+
+        document.writeln('"julia is testing string.trim method' + " neat ".trim( ) + '"');
+    </script>
+    </pre>
+</body>
+</html>

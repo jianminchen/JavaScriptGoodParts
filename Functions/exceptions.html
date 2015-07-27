@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <pre>
+        <script>
+        //
+        var add = function (a, b) {
+            if (typeof a !== 'number' || typeof b !== 'number') {
+            throw {
+            name: 'TypeError',
+            message: 'add needs numbers'
+            };
+            }
+            return a + b;
+        }
+
+        //The exception object will be delivered to the catch clause of a try statement:
+        // Make a try_it function that calls the new add
+        // function incorrectly.
+        var try_it = function ( ) {
+            try {
+            add("seven");
+            } catch (e) {
+            document.writeln("The exception example output "+e.name + ': ' + e.message);
+            }
+        }
+
+        try_it( );
+            </script>
+        </pre>
+</body>
+</html>
